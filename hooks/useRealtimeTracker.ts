@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { Project, AuditLog, ProjectStage } from "@/types/tracker";
-import { toast } from "sonner";
+'use client';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { Project, AuditLog, ProjectStage } from '@/types/tracker';
+import { toast } from 'sonner';
 
 export function useRealtimeTracker() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -11,14 +12,14 @@ export function useRealtimeTracker() {
   const fetchData = async () => {
     try {
       const { data: pData } = await supabase
-        .from("projects")
-        .select("*, stages:project_stages(*)")
-        .order("created_at", { ascending: false });
+        .from('projects')
+        .select('*, stages:project_stages(*)')
+        .order('created_at', { ascending: false });
 
       const { data: lData } = await supabase
-        .from("audit_logs")
-        .select("*")
-        .order("created_at", { ascending: false })
+        .from('audit_logs')
+        .select('*')
+        .order('created_at', { ascending: false })
         .limit(30);
 
       if (pData) {
@@ -38,10 +39,10 @@ export function useRealtimeTracker() {
     fetchData();
 
     const stageChannel = supabase
-      .channel("realtime_stages")
+      .channel('realtime_stages')
       .on(
-        "postgres_changes",
-        { event: "UPDATE", schema: "public", table: "project_stages" },
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'project_stages' },
         (payload) => {
           const updatedStage = payload.new as ProjectStage;
           setProjects((prev) =>
@@ -60,10 +61,10 @@ export function useRealtimeTracker() {
       .subscribe();
 
     const logChannel = supabase
-      .channel("realtime_logs")
+      .channel('realtime_logs')
       .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "audit_logs" },
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'audit_logs' },
         (payload) => {
           const newLog = payload.new as AuditLog;
           setAuditLogs((prev) => [newLog, ...prev.slice(0, 29)]);

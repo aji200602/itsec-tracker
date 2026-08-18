@@ -1,16 +1,17 @@
-import { useState } from "react";
-import { useRealtimeTracker } from "@/hooks/useRealtimeTracker";
-import { ProjectStage, StageStatus } from "@/types/tracker";
-import { EditStageModal } from "@/components/EditStageModal";
-import { NewProjectModal } from "@/components/NewProjectModal";
-import { ShieldCheck, Activity, ExternalLink, Plus } from "lucide-react";
-import { Toaster } from "sonner";
+'use client';
+import { useState } from 'react';
+import { useRealtimeTracker } from '@/hooks/useRealtimeTracker';
+import { ProjectStage, StageStatus } from '@/types/tracker';
+import { EditStageModal } from '@/components/EditStageModal';
+import { NewProjectModal } from '@/components/NewProjectModal';
+import { ShieldCheck, Activity, ExternalLink, Plus } from 'lucide-react';
+import { Toaster } from 'sonner';
 
 export default function DashboardPage() {
   const { projects, auditLogs, loading, refetch } = useRealtimeTracker();
   const [selectedStage, setSelectedStage] = useState<{ stage: ProjectStage; projName: string } | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   if (loading) {
     return (
@@ -23,11 +24,11 @@ export default function DashboardPage() {
 
   const getStatusColor = (status: StageStatus) => {
     switch (status) {
-      case "DONE": return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30";
-      case "IN_PROGRESS": return "bg-blue-500/20 text-blue-300 border-blue-500/40 hover:bg-blue-500/30 ring-1 ring-blue-500/50";
-      case "BLOCKED": return "bg-rose-500/20 text-rose-300 border-rose-500/40 hover:bg-rose-500/30";
-      case "NOT_APPLICABLE": return "bg-slate-800/40 text-slate-600 border-slate-800";
-      default: return "bg-slate-900/60 text-slate-400 border-slate-800 hover:bg-slate-800/60";
+      case 'DONE': return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30';
+      case 'IN_PROGRESS': return 'bg-blue-500/20 text-blue-300 border-blue-500/40 hover:bg-blue-500/30 ring-1 ring-blue-500/50';
+      case 'BLOCKED': return 'bg-rose-500/20 text-rose-300 border-rose-500/40 hover:bg-rose-500/30';
+      case 'NOT_APPLICABLE': return 'bg-slate-800/40 text-slate-600 border-slate-800';
+      default: return 'bg-slate-900/60 text-slate-400 border-slate-800 hover:bg-slate-800/60';
     }
   };
 
@@ -54,7 +55,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsAddOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-600/20 transition"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-600/20 transition cursor-pointer"
           >
             <Plus className="w-4 h-4" /> Tambah Project
           </button>
@@ -87,7 +88,7 @@ export default function DashboardPage() {
             </div>
           ) : (
             filteredProjects.map((proj) => {
-              const doneCount = proj.stages?.filter((s) => s.status === "DONE").length || 0;
+              const doneCount = proj.stages?.filter((s) => s.status === 'DONE').length || 0;
               const progressPct = Math.round((doneCount / 23) * 100);
 
               return (
@@ -95,12 +96,12 @@ export default function DashboardPage() {
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
                     <div>
                       <h3 className="text-lg font-bold text-white">{proj.project_name}</h3>
-                      <p className="text-xs text-slate-400">PIC: <span className="text-slate-200">{proj.pic_security}</span> • Vendor: <span className="text-slate-200">{proj.vendor_target || "-"}</span></p>
+                      <p className="text-xs text-slate-400">PIC: <span className="text-slate-200">{proj.pic_security}</span> • Vendor: <span className="text-slate-200">{proj.vendor_target || '-'}</span></p>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-sm font-bold text-blue-400">{doneCount}/23 ({progressPct}%)</span>
                       <div className="w-24 bg-slate-800 rounded-full h-2">
-                        <div className="bg-blue-500 h-2 rounded-full transition-all duration-500" style={{ width: progressPct + "%" }}></div>
+                        <div className="bg-blue-500 h-2 rounded-full transition-all duration-500" style={{ width: progressPct + '%' }}></div>
                       </div>
                     </div>
                   </div>
@@ -142,11 +143,11 @@ export default function DashboardPage() {
                 <div key={log.id} className="p-3 bg-slate-950/60 border border-slate-800/60 rounded-xl text-xs space-y-1">
                   <div className="flex justify-between text-slate-400 text-[10px]">
                     <span className="font-semibold text-blue-400">{log.updated_by}</span>
-                    <span>{new Date(log.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                    <span>{new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
                   <p className="text-slate-200 font-medium">{log.project_name} → <span className="text-slate-400">{log.stage_name}</span></p>
                   <div className="flex items-center gap-1.5 text-[11px]">
-                    <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{log.previous_status || "INIT"}</span>
+                    <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">{log.previous_status || 'INIT'}</span>
                     <span>→</span>
                     <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-medium">{log.new_status}</span>
                   </div>

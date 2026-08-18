@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { toast } from "sonner";
+'use client';
+import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 
 interface Props {
   isOpen: boolean;
@@ -11,17 +12,17 @@ interface Props {
 export function NewProjectModal({ isOpen, onClose, onSuccess }: Props) {
   if (!isOpen) return null;
 
-  const [projectName, setProjectName] = useState("");
-  const [picSecurity, setPicSecurity] = useState("");
-  const [vendorTarget, setVendorTarget] = useState("");
-  const [targetDate, setTargetDate] = useState("");
+  const [projectName, setProjectName] = useState('');
+  const [picSecurity, setPicSecurity] = useState('');
+  const [vendorTarget, setVendorTarget] = useState('');
+  const [targetDate, setTargetDate] = useState('');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      const { error } = await supabase.from("projects").insert({
+      const { error } = await supabase.from('projects').insert({
         project_name: projectName,
         pic_security: picSecurity,
         vendor_target: vendorTarget || null,
@@ -33,7 +34,7 @@ export function NewProjectModal({ isOpen, onClose, onSuccess }: Props) {
       onSuccess();
       onClose();
     } catch (err: any) {
-      toast.error(err.message || "Gagal menambah project");
+      toast.error(err.message || 'Gagal menambah project');
     } finally {
       setIsSaving(false);
     }
@@ -99,7 +100,7 @@ export function NewProjectModal({ isOpen, onClose, onSuccess }: Props) {
               Batal
             </button>
             <button type="submit" disabled={isSaving} className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 font-semibold text-white">
-              {isSaving ? "Menyimpan..." : "Buat Project & 23 Milestones"}
+              {isSaving ? 'Menyimpan...' : 'Buat Project & 23 Milestones'}
             </button>
           </div>
         </form>

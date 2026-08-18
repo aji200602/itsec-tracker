@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { ProjectStage, StageStatus } from "@/types/tracker";
-import { supabase } from "@/lib/supabase";
-import { toast } from "sonner";
+'use client';
+import { useState } from 'react';
+import { ProjectStage, StageStatus } from '@/types/tracker';
+import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 
 interface Props {
   stage: ProjectStage | null;
@@ -13,9 +14,9 @@ export function EditStageModal({ stage, projectName, onClose }: Props) {
   if (!stage) return null;
 
   const [status, setStatus] = useState<StageStatus>(stage.status);
-  const [docLink, setDocLink] = useState(stage.document_link || "");
-  const [notes, setNotes] = useState(stage.notes || "");
-  const [author, setAuthor] = useState(stage.updated_by || "PIC IT Security");
+  const [docLink, setDocLink] = useState(stage.document_link || '');
+  const [notes, setNotes] = useState(stage.notes || '');
+  const [author, setAuthor] = useState(stage.updated_by || 'PIC IT Security');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async (e: React.FormEvent) => {
@@ -23,22 +24,22 @@ export function EditStageModal({ stage, projectName, onClose }: Props) {
     setIsSaving(true);
     try {
       const { error } = await supabase
-        .from("project_stages")
+        .from('project_stages')
         .update({
           status,
           document_link: docLink,
           notes,
           updated_by: author,
-          actual_completed_date: status === "DONE" ? new Date().toISOString().split("T")[0] : null,
+          actual_completed_date: status === 'DONE' ? new Date().toISOString().split('T')[0] : null,
           updated_at: new Date().toISOString()
         })
-        .eq("id", stage.id);
+        .eq('id', stage.id);
 
       if (error) throw error;
       toast.success('Berhasil mengupdate: ' + stage.stage_name);
       onClose();
     } catch (err: any) {
-      toast.error(err.message || "Gagal menyimpan data");
+      toast.error(err.message || 'Gagal menyimpan data');
     } finally {
       setIsSaving(false);
     }
@@ -112,7 +113,7 @@ export function EditStageModal({ stage, projectName, onClose }: Props) {
               Batal
             </button>
             <button type="submit" disabled={isSaving} className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 font-semibold text-white">
-              {isSaving ? "Menyimpan..." : "Simpan Update"}
+              {isSaving ? 'Menyimpan...' : 'Simpan Update'}
             </button>
           </div>
         </form>
