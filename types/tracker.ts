@@ -1,5 +1,5 @@
-export type StageStatus = "NOT_STARTED" | "IN_PROGRESS" | "DONE" | "BLOCKED" | "NOT_APPLICABLE";
-export type ProjectStatus = "ON_TRACK" | "AT_RISK" | "DELAYED" | "COMPLETED";
+export type StageStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'DONE' | 'BLOCKED' | 'NOT_APPLICABLE';
+export type ProjectStatus = 'ON_TRACK' | 'AT_RISK' | 'DELAYED' | 'COMPLETED';
 
 export interface ProjectStage {
   id: string;
@@ -26,10 +26,12 @@ export interface Project {
   overall_status: ProjectStatus;
   stages?: ProjectStage[];
   created_at: string;
+  updated_at?: string;
 }
 
 export interface AuditLog {
   id: string;
+  project_id?: string;
   project_name: string;
   stage_name: string;
   previous_status: StageStatus;
