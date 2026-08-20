@@ -135,13 +135,15 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 mb-6 bg-slate-900/50 p-3.5 rounded-2xl border border-slate-800/80 backdrop-blur-md">
         {/* Search */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+            <Search className="w-4 h-4" />
+          </div>
           <input
             type="text"
             placeholder="Cari nama project, PIC, atau vendor..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl pl-9.5 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
+            className="w-full bg-slate-950/90 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition shadow-inner"
           />
         </div>
 
