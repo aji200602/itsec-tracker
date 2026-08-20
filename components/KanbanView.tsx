@@ -35,7 +35,7 @@ export function KanbanView({ projects, onSelectStage }: Props) {
         const colProjects = getPhaseProjects(col.num);
         return (
           <div key={col.num} className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 flex flex-col min-h-[500px]">
-            <div className={}>
+            <div className={"flex justify-between items-center px-3 py-2 rounded-xl border mb-3 " + col.color}>
               <h4 className="font-bold text-xs uppercase tracking-wider">{col.title}</h4>
               <span className="px-2 py-0.5 rounded-full bg-slate-950/60 text-xs font-bold">{colProjects.length}</span>
             </div>

@@ -94,13 +94,19 @@ export default function DashboardPage() {
           <div className="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1">
             <button
               onClick={() => setViewMode('matrix')}
-              className={}
+              className={
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer " +
+                (viewMode === 'matrix' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200')
+              }
             >
               <LayoutGrid className="w-3.5 h-3.5" /> Matrix
             </button>
             <button
               onClick={() => setViewMode('kanban')}
-              className={}
+              className={
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer " +
+                (viewMode === 'kanban' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200')
+              }
             >
               <Kanban className="w-3.5 h-3.5" /> Kanban
             </button>
@@ -214,7 +220,14 @@ export default function DashboardPage() {
                     <span className="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">{log.previous_status || 'INIT'}</span>
                     <span>→</span>
                     <span
-                      className={}
+                      className={
+                        "px-1.5 py-0.5 rounded text-[10px] font-semibold " +
+                        (log.new_status === 'DONE'
+                          ? 'bg-emerald-500/20 text-emerald-300'
+                          : log.new_status === 'BLOCKED'
+                          ? 'bg-rose-500/20 text-rose-300'
+                          : 'bg-blue-500/20 text-blue-300')
+                      }
                     >
                       {log.new_status}
                     </span>

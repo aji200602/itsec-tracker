@@ -50,7 +50,10 @@ export function MatrixView({ projects, onSelectStage, onOpenAddModal }: Props) {
         return (
           <div
             key={proj.id}
-            className={}
+            className={
+              "bg-slate-900/80 border rounded-2xl p-6 shadow-xl backdrop-blur-md transition-all " +
+              (hasBlocked ? "border-rose-900/40 shadow-rose-950/10" : "border-slate-800/80 hover:border-slate-700")
+            }
           >
             {/* Project Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
@@ -170,7 +173,10 @@ function StageCard({
   return (
     <button
       onClick={() => onSelect(stage, projectName)}
-      className={}
+      className={
+        "text-left p-2.5 rounded-xl border text-xs transition-all cursor-pointer flex flex-col justify-between min-h-[82px] relative group " +
+        getStyle(stage.status)
+      }
     >
       <div className="font-medium line-clamp-2 leading-tight">
         <span className="opacity-60 text-[10px] block font-mono">#{stage.stage_order}</span>
