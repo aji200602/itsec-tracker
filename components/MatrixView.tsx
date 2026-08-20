@@ -87,7 +87,7 @@ export function MatrixView({ projects, onSelectStage, onOpenAddModal }: Props) {
                 <div className="w-24 bg-slate-800 rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width:  }}
+                    style={{ width: `${progressPct}%` }}
                   ></div>
                 </div>
               </div>

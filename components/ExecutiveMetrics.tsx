@@ -40,7 +40,7 @@ export function ExecutiveMetrics({ projects }: Props) {
         </div>
         <div className="mt-4 flex items-center gap-2">
           <div className="flex-1 bg-slate-800/80 rounded-full h-1.5">
-            <div className="bg-blue-500 h-1.5 rounded-full transition-all duration-500" style={{ width:  }}></div>
+            <div className="bg-blue-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${avgCompletionRate}%` }}></div>
           </div>
           <span className="text-xs font-bold text-blue-400">{avgCompletionRate}% Avg</span>
         </div>

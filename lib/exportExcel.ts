@@ -15,7 +15,7 @@ export function exportProjectsToExcel(projects: Project[]) {
       'PIC Security': p.pic_security,
       'Vendor': p.vendor_target || '-',
       'Target Live Date': p.target_live_date || '-',
-      'Progress (%)': ,
+      'Progress (%)': `${progressPct}% (${doneCount}/23)`,
       'Status': blockedCount > 0 ? 'BLOCKED / KENDALA' : doneCount === 23 ? 'COMPLETED' : 'IN PROGRESS',
       'In Progress': inProgressCount,
       'Blocked Stages': blockedCount,

@@ -68,7 +68,16 @@ export function KanbanView({ projects, onSelectStage }: Props) {
                         >
                           <div className="flex justify-between text-[10px] text-slate-400 mb-1">
                             <span>Milestone Aktif</span>
-                            <span className={}>
+                            <span
+                              className={
+                                "font-semibold " +
+                                (activeStage.status === 'BLOCKED'
+                                  ? 'text-rose-400'
+                                  : activeStage.status === 'DONE'
+                                  ? 'text-emerald-400'
+                                  : 'text-blue-400')
+                              }
+                            >
                               {activeStage.status}
                             </span>
                           </div>
