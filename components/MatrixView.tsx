@@ -187,7 +187,7 @@ function StageCard({
         <span className="font-semibold">{stage.status}</span>
         <div className="flex items-center gap-1">
           {isOverdue && (
-            <span className="text-rose-400 font-bold flex items-center gap-0.5" title={}>
+            <span className="text-rose-400 font-bold flex items-center gap-0.5" title={`Aging: ${days} hari`}>
               <Clock className="w-2.5 h-2.5" /> {days}d
             </span>
           )}
