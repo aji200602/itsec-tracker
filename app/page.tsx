@@ -250,6 +250,7 @@ export default function DashboardPage() {
           stage={selectedStage.stage}
           projectName={selectedStage.projName}
           onClose={() => setSelectedStage(null)}
+          onSuccess={refetch}
         />
       )}
 

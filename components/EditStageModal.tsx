@@ -8,9 +8,10 @@ interface Props {
   stage: ProjectStage | null;
   projectName: string;
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
-export function EditStageModal({ stage, projectName, onClose }: Props) {
+export function EditStageModal({ stage, projectName, onClose, onSuccess }: Props) {
   if (!stage) return null;
 
   const [status, setStatus] = useState<StageStatus>(stage.status);
@@ -37,6 +38,7 @@ export function EditStageModal({ stage, projectName, onClose }: Props) {
 
       if (error) throw error;
       toast.success('Berhasil mengupdate: ' + stage.stage_name);
+      if (onSuccess) onSuccess();
       onClose();
     } catch (err: any) {
       toast.error(err.message || 'Gagal menyimpan data');
