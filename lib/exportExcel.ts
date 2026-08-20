@@ -52,5 +52,5 @@ export function exportProjectsToExcel(projects: Project[]) {
   XLSX.utils.book_append_sheet(wb, wsDetail, 'Detail 23 Tahapan');
 
   const today = new Date().toISOString().split('T')[0];
-  XLSX.writeFile(wb, );
+  XLSX.writeFile(wb, `ITSec_Procurement_Report_${today}.xlsx`);
 }
